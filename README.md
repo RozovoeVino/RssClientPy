@@ -29,17 +29,7 @@ $ python install.py
 
 далее программа сама установит необходимые ей модули. И всё :)
 
-<style>
-.alert-warning {
-    background: rgba(255,64,64,.2);
-    border-radius: 5px;
-    border-color: rgba(255, 32, 32, .5);
-    border-style: solid;
-    border-width: 1px;
-    padding: 5px;
-}
-</style>
-<div class="alert-warning">
+<div style="background: rgba(255,64,64,.2);border-radius: 5px;border-color: rgba(255, 32, 32, .5);border-style: solid;border-width: 1px;padding: 5px;">
 <b>Внимание!</b><br/>Если ваш Linux не Ubuntu 16.04, то вам <s>пизда</s> необходимо <a href="https://wiki.wxpython.org/How%20to%20install%20wxPython">вручную установить wxPython</a>
 </div>
 
