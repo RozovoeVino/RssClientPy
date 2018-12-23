@@ -1,3 +1,6 @@
+#! /usr/bin/env python3
+# -*- coding: utf-8 -*-
+
 import feedparser
 import re
 import sqlite3
@@ -37,7 +40,7 @@ class RssPanel(wx.Panel):
 		lbl2 = wx.StaticText(self, label="Поиск:")
 		self.rssSearch = wx.TextCtrl(self, value="")
 		# self.rssSearch2 = wx.TextCtrl(self, value="")
-		self.rssUrlTxt = wx.TextCtrl(self, value="https://lenta.ru/rss")
+		self.rssUrlTxt = wx.TextCtrl(self, value="https://www.pornhub.com/video/webmasterss")
 		
 		searchBtn = wx.Button(self, label="Поиск по названию")
 		searchBtn.Bind(wx.EVT_BUTTON, self.searchTitle)
@@ -135,7 +138,7 @@ class RssPanel(wx.Panel):
 		for key in feed["entries"]:
 			title = key["title"]
 			link = key["link"]
-			summary = key["summary"]
+			summary = key["summary"] if "summary" in key else "Нет"
 			self.data.append(RSS(title, link, website, summary, key))
  
 		busyDlg = None
