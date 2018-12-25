@@ -39,7 +39,6 @@ class RssPanel(wx.Panel):
 		lbl = wx.StaticText(self, label="URL канала:")
 		lbl2 = wx.StaticText(self, label="Поиск:")
 		self.rssSearch = wx.TextCtrl(self, value="")
-		# self.rssSearch2 = wx.TextCtrl(self, value="")
 		self.rssUrlTxt = wx.TextCtrl(self, value="https://www.pornhub.com/video/webmasterss")
 		
 		searchBtn = wx.Button(self, label="Поиск по названию")
@@ -56,7 +55,6 @@ class RssPanel(wx.Panel):
 		self.rssOlv.SetEmptyListMsg("Пусто")
 		self.rssOlv.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select)
 		self.rssOlv.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_double_click)
-		self.summaryTxt = wx.html2.WebView.New(self)
  
 		self.wv = wx.html2.WebView.New(self)
 		
@@ -77,10 +75,6 @@ class RssPanel(wx.Panel):
 		rowSizer.Add(lbl, 0, wx.ALL, 5)
 		rowSizer.Add(self.rssUrlTxt, 1, wx.EXPAND|wx.ALL, 5)
 		rowSizer.Add(urlBtn, 0, wx.ALL, 5)
- 
-		vSizer = wx.BoxSizer(wx.VERTICAL)
-		vSizer.Add(self.rssOlv, 1, wx.EXPAND|wx.ALL, 5)
-		vSizer.Add(self.summaryTxt, 1, wx.EXPAND|wx.ALL, 5)
 		
 		rowSizer1 = wx.BoxSizer(wx.HORIZONTAL)
 		rowSizer1.Add(lbl2, 0, wx.ALL, 5)
@@ -88,12 +82,9 @@ class RssPanel(wx.Panel):
 		rowSizer1.Add(searchBtn, 0, wx.ALL, 5)
 		rowSizer1.Add(searchBtn2, 0, wx.ALL, 5)
 		rowSizer1.Add(resetSearchBtn, 0, wx.ALL, 5)
-
-		dispSizer = wx.BoxSizer(wx.HORIZONTAL)
-		dispSizer.Add(vSizer, 1, wx.EXPAND|wx.ALL, 5)
 		
 		rowSizer2 = wx.BoxSizer(wx.HORIZONTAL)
-		rowSizer2.Add(dispSizer, 0, wx.EXPAND|wx.ALL, 5)
+		rowSizer2.Add(self.rssOlv, 0, wx.EXPAND|wx.ALL, 5)
 		rowSizer2.Add(self.wv, 2, wx.EXPAND|wx.ALL, 5)
 		
 		mainSizer = wx.BoxSizer(wx.VERTICAL)
@@ -173,8 +164,8 @@ class RssPanel(wx.Panel):
  
 	def on_select(self, event):    
 		obj = self.rssOlv.GetSelectedObject()
-		html = "<html><body>%s</body></html>" % obj.summary
-		self.summaryTxt.SetPage(html, "")
+		html = "<html><body><h1>%s</h1><small>%s</small><p>%s</p><p><a href='%s'>Открыть полную версию</a></p></body></html>" % (obj.title, obj.website, obj.summary, obj.link)
+		self.wv.SetPage(html, "")
 
 	def update_display(self, data):
 		self.rssOlv.SetColumns([
