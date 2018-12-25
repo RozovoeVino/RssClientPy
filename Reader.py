@@ -129,7 +129,7 @@ class RssPanel(wx.Panel):
 		for key in feed["entries"]:
 			title = key["title"]
 			link = key["link"]
-			summary = key["summary"] if "summary" in key else "Нет"
+			summary = key["summary"] if "summary" in key else "Нет описания"
 			self.data.append(RSS(title, link, website, summary, key))
  
 		busyDlg = None
